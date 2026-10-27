@@ -1,4 +1,4 @@
-package com.example.finsecure_pay;
+package com.finsecure_pay;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.example.finsecure_pay.controller;
+package com.finsecure_pay.controller;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.info.BuildProperties;
