@@ -1,3 +1,8 @@
 spring:
   application:
     name: finsecure-pay
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
