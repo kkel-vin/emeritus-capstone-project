@@ -1,0 +1,13 @@
+package com.example.finsecure_pay;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FinSecurePayApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FinSecurePayApplication.class, args);
+	}
+
+}
