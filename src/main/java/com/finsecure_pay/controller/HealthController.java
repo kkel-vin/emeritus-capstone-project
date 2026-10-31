@@ -13,7 +13,6 @@ import java.util.Map;
  *
  * @author King Kel Vin
  */
-
 @RestController
 public class HealthController {
 

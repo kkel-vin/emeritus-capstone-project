@@ -1,8 +1,18 @@
 spring:
   application:
     name: finsecure-pay
+server:
+  port: 8080
 management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
   endpoints:
     web:
       exposure:
         include: health,info,prometheus
+finsecure:
+  validation:
+    max-amount: ${VALIDATION_MAX_AMOUNT:10000.00}
+    supported-currencies: ${VALIDATION_SUPPORTED_CCY:IDR,SGD,USD,EUR}
