@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.finsecure_pay</groupId>
 	<artifactId>finsecure-pay</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>finsecure-pay</name>
 	<description>FinSecure Pay transaction validation API</description>
 	<url/>
