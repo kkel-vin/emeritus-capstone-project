@@ -29,7 +29,7 @@ mvn spring-boot:run
 2. `amount` required, greater than 0, at most 2 decimal places
 3. `amount` must not exceed the transaction limit (default 10000.00)
 4. `currency` required and one of the supported currency codes (default IDR, SGD, USD, EUR)
-5. `fromAccount` and `toAccount` required, 12 digits, both cannot be the same.
+5. `fromAccount` and `toAccount` required, must be 12 digits, both values cannot be the same.
 
 ## Configuration
 The limit and currency list can be overridden with environment variables:
