@@ -2,12 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: finsecure-pay
+  labels:
+    app: finsecure-pay
 spec:
   type: LoadBalancer
   selector:
     app: finsecure-pay
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 8080
 ---
 apiVersion: v1
