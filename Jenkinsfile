@@ -62,6 +62,27 @@ pipeline {
             }
         }
 
+        stage('Image Scan (Trivy)') {
+            steps {
+                sh '''
+                    mkdir -p reports
+                    set +e
+                    docker run --rm \
+                      -v /var/run/docker.sock:/var/run/docker.sock \
+                      -v trivy-cache:/root/.cache/ \
+                      aquasec/trivy:latest image \
+                      --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
+                      "$IMAGE" > reports/trivy-image.txt 2>&1
+                    rc=$?
+                    cat reports/trivy-image.txt
+                    exit $rc
+                '''
+            }
+            post {
+                always { archiveArtifacts artifacts: 'reports/*.txt', allowEmptyArchive: true }
+            }
+        }
+
         stage('Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub',
