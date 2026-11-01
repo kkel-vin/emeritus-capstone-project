@@ -38,3 +38,6 @@ The limit and currency list can be overridden with environment variables:
 |----------------------------|-------------------|
 | `VALIDATION_MAX_AMOUNT`    | `10000.00`        |
 | `VALIDATION_SUPPORTED_CCY` | `IDR,SGD,USD,EUR` |
+
+## Security scanning
+This product uses data from the NVD API but is not endorsed or certified by the NVD.

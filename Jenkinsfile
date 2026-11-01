@@ -56,6 +56,22 @@ pipeline {
             }
         }
 
+        stage('Dependency Scan (Dependency-Check)') {
+            steps {
+                withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
+                    sh '''
+                        ./mvnw -B org.owasp:dependency-check-maven:check \
+                          -DnvdApiKey="$NVD_API_KEY" \
+                          -DdataDirectory=/var/jenkins_home/dc-data \
+                          -DfailBuildOnCVSS=7
+                    '''
+                }
+            }
+            post {
+                always { archiveArtifacts artifacts: 'target/dependency-check-report.*', allowEmptyArchive: true }
+            }
+        }
+
         stage('Docker Build') {
             steps {
                 sh 'docker build -t "$IMAGE" .'
