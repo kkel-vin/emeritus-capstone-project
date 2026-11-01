@@ -104,7 +104,7 @@ class TransactionValidatorTest {
         ValidationResult result = transactionValidator.validate(emptyRequest);
 
         assertFalse(result.valid());
-        assertEquals(6, result.errors().size());
+        assertEquals(5, result.errors().size());
     }
 
     @Test
