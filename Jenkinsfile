@@ -150,7 +150,20 @@ pipeline {
     }
 
     post {
-        success { echo "Deployed ${env.IMAGE}" }
-        failure { echo 'Pipeline failed' }
+        success {
+            emailext(
+                to: "${env.NOTIFY_EMAIL}",
+                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Build ${env.BUILD_NUMBER} deployed ${env.IMAGE}. Details: ${env.BUILD_URL}"
+            )
+        }
+        failure {
+            emailext(
+                to: "${env.NOTIFY_EMAIL}",
+                subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Build ${env.BUILD_NUMBER} failed. Console output: ${env.BUILD_URL}console",
+                attachLog: true
+            )
+        }
     }
 }
