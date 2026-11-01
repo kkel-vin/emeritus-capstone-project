@@ -121,9 +121,11 @@ pipeline {
                     sh '''
                         echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin
                         docker push "$IMAGE"
-                        docker logout
                     '''
                 }
+            }
+            post {
+                always { sh 'docker logout || true' }
             }
         }
 
