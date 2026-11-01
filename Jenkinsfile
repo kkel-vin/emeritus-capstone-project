@@ -56,6 +56,21 @@ pipeline {
             }
         }
 
+        stage('Code Quality (SonarCloud)') {
+            steps {
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                    sh '''
+                        ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+                          -Dsonar.host.url=https://sonarcloud.io \
+                          -Dsonar.organization=kkel-vin \
+                          -Dsonar.projectKey=kkel-vin_emeritus-capstone-project \
+                          -Dsonar.token="$SONAR_TOKEN" \
+                          -Dsonar.qualitygate.wait=true
+                    '''
+                }
+            }
+        }
+
         stage('Dependency Scan (Dependency-Check)') {
             steps {
                 withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
