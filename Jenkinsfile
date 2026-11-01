@@ -81,8 +81,7 @@ pipeline {
                         usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
                         aws eks update-kubeconfig --name "$CLUSTER" --region "$REGION"
-                        kubectl apply -f k8s/finsecure-pay.yaml
-                        kubectl set image deployment/finsecure-pay finsecure-pay="$IMAGE"
+                        sed "s|^\( *image: \).*|\1$IMAGE|" k8s/finsecure-pay.yaml | kubectl apply -f -
                         if ! kubectl rollout status deployment/finsecure-pay --timeout=180s; then
                             echo "Rollout failed, rolling back to the previous version"
                             kubectl rollout undo deployment/finsecure-pay
